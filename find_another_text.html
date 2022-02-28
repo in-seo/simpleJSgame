@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game_2</title>
+    <script src="js/jquery.js"></script>
+<script>
+$(function( ) {
+    var difficulty =1;
+    function level1() {
+        var arr = new Array(20);
+        var lev1_str="멵";
+        var answer = Math.floor(Math.random()*(arr.length-1))+1;
+        for(var i=0; i<arr.length; i++){
+            arr[i]= lev1_str;
+        }
+        arr[answer] = "먽";
+        return [arr,answer];
+    } 
+    function level2() {
+        var arr = new Array(49);
+        var lev2_str="꾭";
+        var answer = Math.floor(Math.random()*(arr.length-1))+1;
+        for(var i=0; i<arr.length; i++){
+            arr[i]= lev2_str;
+        }
+        arr[answer] = "꼽";
+        return [arr,answer];
+    } 
+    function level3() {
+        var arr = new Array(100);
+        var lev3_str="뿁";
+        var answer = Math.floor(Math.random()*(arr.length-1))+1;
+        for(var i=0; i<arr.length; i++){
+            arr[i]= lev3_str;
+        }
+        arr[answer] = "뽑";
+        return [arr,answer];
+    } 
+	$("#lev1").on("click",function(){
+        var [array,answer] = level1();
+        time=new T
+        $("div p").html(function(){
+            var txt="<strong>Level 1</strong><br>";
+            for(var i=0; i<array.length; i++){
+                if(i!=0 && i%5==0){
+                    txt+="<br>";
+                }        
+                txt+=array[i];    
+            }
+            txt+="<br><label>정답입력 : <input type=\"text\" id =\"answer\" placeholder=\"하나의 다른 글자를 입력\"></label><br>";
+            return txt;
+        })
+        $("#sub").on("click",function(){
+            if(difficulty>1)
+                return false;
+            if($("#answer").val()==array[answer]){
+                alert("정답입니다 레벨2로 진입가능합니다.");
+                difficulty++;
+            }
+            else{
+                alert("틀렸습니다 재시작하겠습니다");
+                location.href='http://127.0.0.1:5500/find_another_text.html';
+            } 
+        })
+    });
+    $("#lev2").on("click",function(){
+        if(difficulty<2){
+            alert("레벨1을 클리어 하고 와주세요");
+            return false;
+        }
+        var [array,answer] = level2();
+        $("div p").html(function(){
+            var txt="<strong>Level 2</strong><br>";
+            for(var i=0; i<array.length; i++){
+                if(i!=0 && i%7==0){
+                    txt+="<br>";
+                }        
+                txt+=array[i];    
+            }
+            txt+="<br><label>정답입력 : <input type=\"text\" id =\"answer\" placeholder=\"하나의 다른 글자를 입력\"></label>";
+            return txt;
+        })
+        $("#sub").on("click",function(){
+            if(difficulty>2)
+                return false;
+            if($("#answer").val()==array[answer]){
+                alert("정답입니다 최종 레벨로 진입가능합니다.");
+                difficulty++; 
+            }
+            else{
+                alert("틀렸습니다 재시작하겠습니다");
+                location.href='http://127.0.0.1:5500/find_another_text.html';
+            } 
+        })
+    });
+    $("#lev3").on("click",function(){
+        if(difficulty<2){
+            alert("레벨1을 클리어 하고 와주세요");
+            return false;
+        }
+        else if(difficulty<3){
+            alert("레벨2를 클리어 하고 와주세요");
+            return false;
+        }
+        var [array,answer] = level3();
+        $("div p").html(function(){
+            var txt="<strong>Level 3</strong><br>";
+            for(var i=0; i<array.length; i++){
+                if(i!=0 && i%10==0){
+                    txt+="<br>";
+                }        
+                txt+=array[i];    
+            }
+            txt+="<br><label>정답입력 : <input type=\"text\" id =\"answer\" placeholder=\"하나의 다른 글자를 입력\"></label>";
+            return txt;
+        })
+        $("#sub").on("click",function(){
+            if($("#answer").val()==array[answer]){
+                alert("정답입니다. 클리어 하셨습니다!");
+                difficulty++; 
+            }
+            else{
+                alert("틀렸습니다 재시작하겠습니다");
+                location.href='http://127.0.0.1:5500/find_another_text.html';
+            } 
+        })
+        
+    });
+});
+</script>
+<style>
+body
+{
+  margin: 0 auto;
+  width: 300px;
+  font-weight: bolder;
+}
+h2{
+    text-align: center;
+}
+div p{
+    font-family: "paybooc-Light";
+    font-size: xx-small;
+}
+    .button {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding:0px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    height: 30px;
+    background-color: #6aafe6;
+    color: #d4dfe6;
+    }
+    #reset{
+        width: 300px;
+        margin-top: 5px;
+        background-color: #f199bc;
+        color: #d4dfe6;
+        font-size: 30px;
+        height: 100px;
+    }
+</style>
+</head>
+<body>
+    <h2>다른 글자 맞추기</h2>
+    <div>
+        <p>글자 등장 자리</p>
+        <button type="button" id="lev1" class="button">레벨1</button>
+        <button type="button" id="lev2" class="button">레벨2</button>
+        <button type="button" id="lev3" class="button">레벨3</button>
+        <input type="button" id="sub" class="button" style="width: 300px; height: 50px; margin-top: 5px; font-size: x-large;"  value="정답제출"><br>
+        <button type="button" onclick="location.href = 'http://127.0.0.1:5500/find_another_text.html'" class="button" id="reset">재시작</button>
+    </div>
+</body>
+</html>

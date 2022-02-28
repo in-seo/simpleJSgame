@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game_1</title>
+    <script src="js/jquery.js"></script>
+<script>
+$(function( ) {
+	var arr = ["scissors","rock","paper"]; // == var arr = new Array();
+    var idx=-1;
+    var timerId;
+        function showImage(){
+            idx=-1;
+            timerId = setInterval(function(){
+                idx++;
+                if(idx%3==0){
+                $(".here img").attr("src","images/math_img_1.jpg");
+                }
+                else if(idx%3==1){
+                    $(".here img").attr("src","images/math_img_2.jpg");
+                }
+                else if(idx%3==2){
+                    $(".here img").attr("src","images/math_img_3.jpg");
+                    
+                }
+            },1000)
+        }
+        showImage();
+    $("#sci").on("click",function(){
+        if(idx%3==0){
+            alert("비김");
+        }
+        else if(idx%3==1){
+            alert("짐")
+        }
+        else{
+            alert("이김");
+        }
+        clearInterval(timerId);
+    })
+    $("#rock").on("click",function(){
+        if(idx%3==0){
+            alert("이김");
+        }
+        else if(idx%3==1){
+            alert("비김")
+        }
+        else{
+            alert("짐");
+        }
+        clearInterval(timerId);
+    })
+    $("#pap").on("click",function(){
+        if(idx%3==0){
+            alert("짐");
+        }
+        else if(idx%3==1){
+            alert("이김")
+        }
+        else{
+            alert("비김");
+        }
+        clearInterval(timerId);
+    })
+
+    timerId = $("#reset").on("click",showImage());
+    
+});
+</script>
+</head>
+<body>
+    <p class="here"><img src=""></p>
+    <div class="section">
+        <button type="button" id="sci" class="btn">가위</button>
+        <button type="button" id="rock" class="btn">바위</button>
+        <button type="button" id="pap" class="btn">보</button> <br>
+        <button type="button" id="reset">리셋하기</button>
+    </div>
+</body>
+</html>
