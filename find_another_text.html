@@ -9,6 +9,9 @@
 <script>
 $(function( ) {
     var difficulty =1;
+    var time;
+    var timeBeforeClick;
+    var timeRecorded;
     function level1() {
         var arr = new Array(20);
         var lev1_str="멵";
@@ -17,6 +20,8 @@ $(function( ) {
             arr[i]= lev1_str;
         }
         arr[answer] = "먽";
+        time = new Date;
+        timeBeforeClick = time.getTime();
         return [arr,answer];
     } 
     function level2() {
@@ -41,7 +46,6 @@ $(function( ) {
     } 
 	$("#lev1").on("click",function(){
         var [array,answer] = level1();
-        time=new T
         $("div p").html(function(){
             var txt="<strong>Level 1</strong><br>";
             for(var i=0; i<array.length; i++){
@@ -119,8 +123,9 @@ $(function( ) {
         })
         $("#sub").on("click",function(){
             if($("#answer").val()==array[answer]){
-                alert("정답입니다. 클리어 하셨습니다!");
-                difficulty++; 
+                time=new Date;
+                timeRecorded = time.getTime() - timeBeforeClick;
+                alert("정답입니다. 클리어 하셨습니다!\n"+ timeRecorded/1000 + '초 걸렸습니다');
             }
             else{
                 alert("틀렸습니다 재시작하겠습니다");
